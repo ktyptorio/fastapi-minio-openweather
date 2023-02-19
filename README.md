@@ -11,6 +11,12 @@ Before deploying, you need to create a `.env` file and define the following valu
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
 - `POSTGRES_DB`
+- `MINIO_ROOT_USER`
+- `MINIO_ROOT_PASSWORD`
+- `MINIO_ACCESS_KEY`
+- `MINIO_SECRET_KEY`
+
+(Set up `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` after Minio Server is running. Stop and Run again the service after updating it in .env file)
 
 To deploy the service, run the following command:
 
@@ -18,6 +24,12 @@ To deploy the service, run the following command:
 docker-compose up --env-file=.env --build
 ```
 
+To migrate the database, run the following command:
+
+```
+docker-compose exec backend aerich init-db
+docker-compose exec backend aerich upgrade
+```
 
 This will start the API service and make it available at `http://localhost:5000`.
 
